@@ -29,6 +29,7 @@ export default function RootLayout({
     <html lang="he" dir="rtl">
       <body
         className={`${assistant.variable} ${heebo.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Navbar />
         {children}
