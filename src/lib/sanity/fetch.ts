@@ -15,7 +15,13 @@ export async function sanityFetch<QueryResponse>({
   revalidate?: number | false;
   tags?: string[];
 }) {
-  const isDraftMode = (await draftMode()).isEnabled;
+  let isDraftMode = false;
+  try {
+    isDraftMode = (await draftMode()).isEnabled;
+  } catch {
+    // draftMode() throws when called outside a request scope
+    // (e.g. during generateStaticParams at build time)
+  }
 
   if (isDraftMode && !token) {
     throw new Error("Missing SANITY_API_READ_TOKEN for draft mode");
