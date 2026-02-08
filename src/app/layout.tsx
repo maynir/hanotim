@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { assistant, heebo } from "@/lib/fonts";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,10 +28,7 @@ export default function RootLayout({
         className={`${assistant.variable} ${heebo.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Navbar />
         {children}
-        <Footer />
-        <WhatsAppButton />
       </body>
     </html>
   );
