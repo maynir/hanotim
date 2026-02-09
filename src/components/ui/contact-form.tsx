@@ -1,14 +1,14 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitLead } from "@/lib/actions/lead";
-import type { LeadActionState } from "@/lib/actions/lead";
+import { processContactForm } from "@/app/actions/contact";
+import type { LeadActionState } from "@/app/actions/contact";
 import { Loader2, CheckCircle } from "lucide-react";
 
 const initialState: LeadActionState = {};
 
 export function ContactForm() {
-  const [state, formAction, isPending] = useActionState(submitLead, initialState);
+  const [state, formAction, isPending] = useActionState(processContactForm, initialState);
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -39,11 +39,34 @@ export function ContactForm() {
               name="name"
               required
               disabled={isPending}
+              defaultValue={state.values?.name}
               className="w-full px-4 py-3 rounded-lg border border-stone/30 focus:border-forest focus:ring-2 focus:ring-forest/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="הכנס את שמך המלא"
             />
             {state.errors?.name && (
               <p className="mt-1 text-sm text-red-600">{state.errors.name[0]}</p>
+            )}
+          </div>
+
+          {/* Project Type */}
+          <div>
+            <label htmlFor="projectType" className="block text-sm font-medium text-bark mb-2">
+              סוג הפרויקט <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="projectType"
+              name="projectType"
+              required
+              disabled={isPending}
+              defaultValue={state.values?.projectType || ""}
+              className="w-full px-4 py-3 rounded-lg border border-stone/30 focus:border-forest focus:ring-2 focus:ring-forest/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed invalid:text-stone/50"
+            >
+              <option value="" disabled>בחר סוג פרויקט</option>
+              <option value="פרטי">פרטי</option>
+              <option value="עסקי">עסקי</option>
+            </select>
+            {state.errors?.projectType && (
+              <p className="mt-1 text-sm text-red-600">{state.errors.projectType[0]}</p>
             )}
           </div>
 
@@ -58,6 +81,7 @@ export function ContactForm() {
               name="phone"
               required
               disabled={isPending}
+              defaultValue={state.values?.phone}
               className="w-full px-4 py-3 rounded-lg border border-stone/30 focus:border-forest focus:ring-2 focus:ring-forest/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="050-123-4567"
             />
@@ -69,13 +93,15 @@ export function ContactForm() {
           {/* Email */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-bark mb-2">
-              אימייל <span className="text-stone text-xs">(אופציונלי)</span>
+              אימייל <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              required
               disabled={isPending}
+              defaultValue={state.values?.email}
               className="w-full px-4 py-3 rounded-lg border border-stone/30 focus:border-forest focus:ring-2 focus:ring-forest/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="example@email.com"
             />
@@ -95,6 +121,7 @@ export function ContactForm() {
               required
               rows={5}
               disabled={isPending}
+              defaultValue={state.values?.message}
               className="w-full px-4 py-3 rounded-lg border border-stone/30 focus:border-forest focus:ring-2 focus:ring-forest/20 transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="ספר לנו על הפרויקט שלך..."
             />

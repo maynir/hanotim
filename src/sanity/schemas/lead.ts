@@ -24,6 +24,18 @@ export default defineType({
       validation: (Rule) => Rule.email(),
     }),
     defineField({
+      name: "projectType",
+      title: "סוג פרויקט",
+      type: "string",
+      options: {
+        list: [
+          { title: "פרטי", value: "פרטי" },
+          { title: "עסקי", value: "עסקי" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "message",
       title: "הודעה",
       type: "text",
@@ -53,13 +65,14 @@ export default defineType({
     select: {
       name: "name",
       phone: "phone",
+      projectType: "projectType",
       submittedAt: "submittedAt",
     },
     prepare(selection) {
-      const { name, phone, submittedAt } = selection;
+      const { name, phone, projectType, submittedAt } = selection;
       return {
         title: name,
-        subtitle: `${phone} - ${new Date(submittedAt).toLocaleDateString("he-IL")}`,
+        subtitle: `${projectType} - ${phone} - ${new Date(submittedAt).toLocaleDateString("he-IL")}`,
       };
     },
   },
