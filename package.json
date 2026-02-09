@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@react-email/components": "^0.5.7",
+    "@react-email/tailwind": "^1.2.2",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^5.8.1",
     "lucide-react": "^0.563.0",
