@@ -23,6 +23,8 @@
     "sanity": "^5.8.1",
     "server-only": "^0.0.1",
     "styled-components": "^6.3.9",
+    "translate": "^3.0.1",
+    "transliteration": "^2.3.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {

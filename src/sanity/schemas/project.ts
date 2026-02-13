@@ -1,4 +1,7 @@
 import { defineField, defineType } from "sanity";
+import type { SlugSchemaType, SlugSourceContext } from "sanity";
+import { translateHebrewToEnglish } from "@/lib/translator";
+import { apiVersion } from "@/sanity/env";
 
 export default defineType({
   name: "project",
@@ -18,6 +21,32 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        slugify: async (
+          input: string,
+          _schemaType: SlugSchemaType,
+          context: SlugSourceContext,
+        ) => {
+          const baseSlug = await translateHebrewToEnglish(input);
+          const client = context.getClient({ apiVersion });
+
+          // Check if the base slug is already taken
+          const query = `count(*[_type == "project" && slug.current == $slug])`;
+          let candidate = baseSlug;
+          let suffix = 0;
+
+          while (true) {
+            const count = await client.fetch<number>(query, {
+              slug: candidate,
+            });
+
+            if (count === 0) break;
+
+            suffix += 1;
+            candidate = `${baseSlug}-${suffix}`;
+          }
+
+          return candidate;
+        },
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -108,3 +137,4 @@ export default defineType({
     },
   },
 });
+
