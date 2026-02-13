@@ -42,7 +42,7 @@ export function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 start-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
         <ChevronDown className="h-8 w-8 text-cream" />
       </div>
     </section>

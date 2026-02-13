@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navigation = [
   { name: "ראשי", href: "/" },
   { name: "פרויקטים", href: "/projects" },
-  { name: "צור קשר", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -20,8 +20,21 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-bold text-forest font-heading hover:text-forest-light transition-colors"
+            onClick={(e) => {
+              if (window.location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="flex items-center gap-2 text-2xl font-bold text-forest font-heading hover:text-forest-light transition-colors"
           >
+            <Image
+              src="/logo.png"
+              alt="הנוטעים לוגו"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+            />
             הנוטעים
           </Link>
 
@@ -37,7 +50,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/#contact"
               className="rounded-full bg-leaf px-6 py-2.5 text-base font-semibold text-forest-dark hover:bg-leaf-dark hover:text-cream transition-all shadow-sm hover:shadow-md"
             >
               צור קשר עכשיו
@@ -74,7 +87,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link
-                href="#contact"
+                href="/#contact"
                 className="mx-3 mt-4 block rounded-full bg-leaf px-6 py-3 text-center text-base font-semibold text-forest-dark hover:bg-leaf-dark hover:text-cream transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
