@@ -44,9 +44,9 @@ export function ProjectCard({
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
       />
 
-      {/* Hover overlay: darkens + shows title */}
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
-        <h3 className="text-2xl md:text-3xl font-bold text-white font-heading opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 text-center px-4 drop-shadow-lg">
+      {/* Overlay: on phone always show title; on md+ show on hover */}
+      <div className="absolute inset-0 bg-black/40 md:bg-black/0 md:group-hover:bg-black/40 transition-colors duration-500 flex items-center justify-center">
+        <h3 className="text-2xl md:text-3xl font-bold text-white font-heading opacity-100 translate-y-0 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 text-center px-4 drop-shadow-lg">
           {title}
         </h3>
       </div>

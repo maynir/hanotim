@@ -70,15 +70,11 @@ export function ProjectGrid({ projects, viewAllHref }: ProjectGridProps) {
         </div>
       </div>
 
-      {/* Grid – fixed column width, horizontal scroll on small screens */}
+      {/* Grid – fixed-width columns (320px); only column count changes so images don’t shrink */}
       {filteredProjects.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-center">
           <div
-            className="grid gap-2 md:gap-3 auto-rows-[280px] mx-auto"
-            style={{
-              gridTemplateColumns: "repeat(4, 320px)",
-              width: "fit-content",
-            }}
+            className="grid w-fit gap-2 md:gap-3 auto-rows-[280px] [grid-template-columns:repeat(1,320px)] sm:[grid-template-columns:repeat(2,320px)] lg:[grid-template-columns:repeat(3,320px)] xl:[grid-template-columns:repeat(4,320px)]"
           >
             {filteredProjects.map((project) => (
               <div key={project._id} className="relative">
