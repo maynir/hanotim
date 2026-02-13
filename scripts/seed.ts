@@ -40,6 +40,14 @@ const images = [
     url: "https://picsum.photos/seed/planning2/1200/800",
     filename: "planning-2.jpg",
   },
+  {
+    url: "https://picsum.photos/seed/garden3/1200/800",
+    filename: "private-garden-3.jpg",
+  },
+  {
+    url: "https://picsum.photos/seed/roof3/1200/800",
+    filename: "roof-garden-3.jpg",
+  },
 ];
 
 // Helper to create a valid Portable Text block with _key and markDefs
@@ -114,6 +122,24 @@ const projects = [
       block("b6b", "התכנון כלל חלוקה לחלקות, מערכת השקיה משותפת, אזור קומפוסט קהילתי ומבנה צל מרכזי לפעילויות חברתיות וסדנאות."),
     ],
     order: 6,
+  },
+  {
+    title: "גינה טרופית בכפר סבא",
+    category: "private",
+    description: [
+      block("b7a", "עיצוב גינה טרופית מרהיבה בכפר סבא, המשלבת צמחיה אקזוטית עם אלמנטים מודרניים. הגינה כוללת בריכת נוי עם מפל מים, שבילי עץ טבעי ופרגולה מוצלת."),
+      block("b7b", "הדגש היה על יצירת חווית נופש ביתית, עם צמחייה עשירה היוצרת תחושת ג'ונגל אורבני מוקפד ומתוחזק."),
+    ],
+    order: 7,
+  },
+  {
+    title: "גג ירוק במתחם מגורים",
+    category: "roof",
+    description: [
+      block("b8a", "פרויקט גג ירוק במתחם מגורים יוקרתי בראשון לציון. הגג כולל אזורי שהייה משותפים, ערוגות תבלינים ומדשאה מטופחת לשימוש הדיירים."),
+      block("b8b", "התכנון שילב מערכות איסוף מי גשמים, תאורת לד חסכונית ובחירת צמחים עמידים לתנאי גג עם חשיפה גבוהה לרוח ולשמש."),
+    ],
+    order: 8,
   },
 ];
 

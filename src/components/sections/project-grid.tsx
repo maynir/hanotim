@@ -35,8 +35,9 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
       : projects.filter((project) => project.category === selectedCategory);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-cream">
-      <div className="mx-auto max-w-7xl">
+    <section className="py-20 bg-cream">
+      {/* Header & filter stay centered */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-bold text-forest font-heading mb-4">
@@ -63,27 +64,35 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
             </button>
           ))}
         </div>
+      </div>
 
-        {/* Grid */}
-        {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Grid – fixed column width, horizontal scroll on small screens */}
+      {filteredProjects.length > 0 ? (
+        <div className="overflow-x-auto">
+          <div
+            className="grid gap-2 md:gap-3 auto-rows-[280px] mx-auto"
+            style={{
+              gridTemplateColumns: "repeat(4, 320px)",
+              width: "fit-content",
+            }}
+          >
             {filteredProjects.map((project) => (
-              <ProjectCard
-                key={project._id}
-                title={project.title}
-                slug={project.slug.current}
-                category={project.category}
-                mainImage={project.mainImage}
-                imageCount={project.imageCount}
-              />
+              <div key={project._id} className="relative">
+                <ProjectCard
+                  title={project.title}
+                  slug={project.slug.current}
+                  category={project.category}
+                  mainImage={project.mainImage}
+                />
+              </div>
             ))}
           </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-lg text-stone">לא נמצאו פרויקטים בקטגוריה זו</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <p className="text-lg text-stone">לא נמצאו פרויקטים בקטגוריה זו</p>
+        </div>
+      )}
     </section>
   );
 }
