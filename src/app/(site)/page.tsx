@@ -30,7 +30,7 @@ export default async function Home() {
     <main>
       <Hero />
       {featuredProjects.length > 0 && (
-        <ProjectGrid projects={featuredProjects} />
+        <ProjectGrid projects={featuredProjects} viewAllHref="/projects" />
       )}
       <ContactSection />
     </main>
