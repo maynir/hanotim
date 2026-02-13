@@ -44,7 +44,7 @@ export function Footer() {
             <h4 className="text-lg font-semibold font-heading mb-4">יצירת קשר</h4>
             <div className="space-y-2 text-sm text-sand">
               <p>טלפון: {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "052-XXX-XXXX"}</p>
-              <p>אימייל: info@hanotim.co.il</p>
+              <p>אימייל: greenspacetlv@gmail.com</p>
             </div>
           </div>
         </div>
