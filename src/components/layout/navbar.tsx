@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navigation = [
@@ -20,8 +21,15 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-bold text-forest font-heading hover:text-forest-light transition-colors"
+            className="flex items-center gap-2 text-2xl font-bold text-forest font-heading hover:text-forest-light transition-colors"
           >
+            <Image
+              src="/logo.png"
+              alt="הנוטעים לוגו"
+              width={40}
+              height={40}
+              className="h-10 w-auto"
+            />
             הנוטעים
           </Link>
 
