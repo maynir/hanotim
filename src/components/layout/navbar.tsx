@@ -50,7 +50,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/#contact"
               className="rounded-full bg-leaf px-6 py-2.5 text-base font-semibold text-forest-dark hover:bg-leaf-dark hover:text-cream transition-all shadow-sm hover:shadow-md"
             >
               צור קשר עכשיו
@@ -87,7 +87,7 @@ export function Navbar() {
                 </Link>
               ))}
               <Link
-                href="#contact"
+                href="/#contact"
                 className="mx-3 mt-4 block rounded-full bg-leaf px-6 py-3 text-center text-base font-semibold text-forest-dark hover:bg-leaf-dark hover:text-cream transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
