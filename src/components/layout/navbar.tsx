@@ -21,6 +21,12 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
+            onClick={(e) => {
+              if (window.location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
             className="flex items-center gap-2 text-2xl font-bold text-forest font-heading hover:text-forest-light transition-colors"
           >
             <Image
