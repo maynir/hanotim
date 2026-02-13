@@ -7,8 +7,6 @@ import { transliterate } from "transliteration";
 // Source: Hebrew (he) -> Target: English (en)
 // ---------------------------------------------------------------------------
 translate.engine = "google";
-translate.from = "he";
-translate.to = "en";
 
 /**
  * Sanitise a raw English string into a URL-safe slug.
@@ -40,7 +38,7 @@ export async function translateHebrewToEnglish(
   text: string,
 ): Promise<string> {
   try {
-    const translated: string = await translate(text);
+    const translated: string = await translate(text, { from: "he", to: "en" });
     return toSlug(translated);
   } catch {
     // Fallback: transliterate Hebrew → ASCII when the service is down
