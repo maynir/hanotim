@@ -34,9 +34,16 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-medium text-bark">טלפון</p>
-                    <p className="text-stone">
-                      {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "052-XXX-XXXX"}
-                    </p>
+                    <a 
+                      href={`tel:+${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "972501234567"}`}
+                      className="text-stone hover:text-forest transition-colors underline-offset-4 hover:underline"
+                      dir="ltr"
+                    >
+                      {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER 
+                        ? `0${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER.slice(3, 5)}-${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER.slice(5, 8)}-${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER.slice(8)}`
+                        : "050-123-4567"
+                      }
+                    </a>
                   </div>
                 </div>
 
@@ -46,7 +53,13 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="font-medium text-bark">אימייל</p>
-                    <p className="text-stone">info@hanotim.co.il</p>
+                    <a 
+                      href="mailto:greenspacetlv@gmail.com"
+                      className="text-stone hover:text-forest transition-colors underline-offset-4 hover:underline"
+                      dir="ltr"
+                    >
+                      greenspacetlv@gmail.com
+                    </a>
                   </div>
                 </div>
 
