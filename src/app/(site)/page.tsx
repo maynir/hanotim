@@ -17,20 +17,20 @@ interface Project {
 }
 
 export default async function Home() {
-  // Fetch latest 6 projects for homepage
+  // Fetch latest 8 projects for homepage
   const allProjects = await sanityFetch<Project[]>({
     query: projectsQuery,
     tags: ["project"],
     revalidate: 3600, // 1 hour
   });
 
-  const featuredProjects = allProjects.slice(0, 6);
+  const featuredProjects = allProjects.slice(0, 8);
 
   return (
     <main>
       <Hero />
       {featuredProjects.length > 0 && (
-        <ProjectGrid projects={featuredProjects} />
+        <ProjectGrid projects={featuredProjects} viewAllHref="/projects" />
       )}
       <ContactSection />
     </main>
