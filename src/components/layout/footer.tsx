@@ -43,8 +43,29 @@ export function Footer() {
           <div>
             <h4 className="text-lg font-semibold font-heading mb-4">יצירת קשר</h4>
             <div className="space-y-2 text-sm text-sand">
-              <p>טלפון: {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "052-XXX-XXXX"}</p>
-              <p>אימייל: greenspacetlv@gmail.com</p>
+              <p>
+                טלפון:{" "}
+                <a 
+                  href={`tel:+${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "972501234567"}`}
+                  className="hover:text-leaf transition-colors underline-offset-4 hover:underline"
+                  dir="ltr"
+                >
+                  {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER 
+                    ? `0${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER.slice(3, 5)}-${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER.slice(5, 8)}-${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER.slice(8)}`
+                    : "050-123-4567"
+                  }
+                </a>
+              </p>
+              <p>
+                אימייל:{" "}
+                <a 
+                  href="mailto:greenspacetlv@gmail.com"
+                  className="hover:text-leaf transition-colors underline-offset-4 hover:underline"
+                  dir="ltr"
+                >
+                  greenspacetlv@gmail.com
+                </a>
+              </p>
             </div>
           </div>
         </div>
