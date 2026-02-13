@@ -8,7 +8,6 @@ import { Menu, X } from "lucide-react";
 const navigation = [
   { name: "ראשי", href: "/" },
   { name: "פרויקטים", href: "/projects" },
-  { name: "צור קשר", href: "#contact" },
 ];
 
 export function Navbar() {
