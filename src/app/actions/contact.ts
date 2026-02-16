@@ -9,6 +9,35 @@ import AdminNotify from "@/emails/AdminNotify";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Verify Cloudflare Turnstile token
+async function verifyTurnstileToken(token: string): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
+  if (!secretKey) {
+    console.error("TURNSTILE_SECRET_KEY is not configured");
+    return false;
+  }
+
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: secretKey,
+          response: token,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    return data.success === true;
+  } catch (error) {
+    console.error("Turnstile verification error:", error);
+    return false;
+  }
+}
+
 // Create a write client for Sanity
 const writeClient = createClient({
   projectId,
@@ -36,6 +65,23 @@ export async function processContactForm(
   formData: FormData
 ): Promise<LeadActionState> {
   try {
+    // Verify Turnstile token (bot protection)
+    const turnstileToken = formData.get("cf-turnstile-response") as string;
+    if (!turnstileToken) {
+      return {
+        success: false,
+        error: "אנא השלם את אימות האבטחה ונסה שוב.",
+      };
+    }
+
+    const isTurnstileValid = await verifyTurnstileToken(turnstileToken);
+    if (!isTurnstileValid) {
+      return {
+        success: false,
+        error: "אימות האבטחה נכשל. אנא רענן את הדף ונסה שוב.",
+      };
+    }
+
     // Parse and validate form data
     const rawData = {
       name: (formData.get("name") as string) ?? "",

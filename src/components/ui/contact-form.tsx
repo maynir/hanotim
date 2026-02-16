@@ -1,14 +1,23 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useRef, useEffect } from "react";
 import { processContactForm } from "@/app/actions/contact";
 import type { LeadActionState } from "@/app/actions/contact";
 import { Loader2, CheckCircle } from "lucide-react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 
 const initialState: LeadActionState = {};
 
 export function ContactForm() {
   const [state, formAction, isPending] = useActionState(processContactForm, initialState);
+  const turnstileRef = useRef<TurnstileInstance>(null);
+
+  // Reset Turnstile on error so user can retry
+  useEffect(() => {
+    if (state.error) {
+      turnstileRef.current?.reset();
+    }
+  }, [state.error]);
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -129,6 +138,12 @@ export function ContactForm() {
               <p className="mt-1 text-sm text-red-600">{state.errors.message[0]}</p>
             )}
           </div>
+
+          {/* Turnstile Bot Protection (invisible) */}
+          <Turnstile
+            ref={turnstileRef}
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+          />
 
           {/* Submit Button */}
           <button
